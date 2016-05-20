@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>419</string>
+	<string>409.2</string>
 	<key>AMApplicationVersion</key>
-	<string>2.6</string>
+	<string>2.5</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -51,7 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>tell application "Finder"	set dirPath to quoted form of (POSIX path of (folder of the front window as alias))	--display dialog 	set opened to (application "iTerm" is running)		tell application "iTerm"		if my isModernVersion(version) then			my new(dirPath, opened)		else			my old(dirPath, opened)		end if	end tellend tellon theSplit(theString, theDelimiter)	set oldDelimiters to AppleScript's text item delimiters	set AppleScript's text item delimiters to theDelimiter	set theArray to every text item of theString	set AppleScript's text item delimiters to oldDelimiters	return theArrayend theSpliton isModernVersion(version)	set myArray to my theSplit(version, ".")	set major to item 1 of myArray	set minor to item 2 of myArray	set veryMinor to item 3 of myArray		if major &lt; 2 then		return false	end if	if major &gt; 2 then		return true	end if	if minor &lt; 9 then		return false	end if	if minor &gt; 9 then		return true	end if	if veryMinor &lt; 20140903 then		return false	end if	return trueend isModernVersionon new(theDir, isOpened)	tell application "iTerm"		activate		set curTerm to (current window)		if curTerm is not equal to missing value then			tell curTerm				if isOpened then					set curSession to (current session of (create tab with default profile))				else					set curSession to (current session of current tab)				end if			end tell		else			tell (create window with default profile)				set curSession to (current session of current tab)			end tell		end if		tell curSession			write text "cd " &amp; theDir &amp; ";clear;" &amp; "pwd;"		end tell	end tellend newon old(theDir, isOpened)	tell application "iTerm"		activate		set curTerm to (current window)		if curTerm is not equal to missing value then			tell curTerm				if isOpened then					launch session "Default"				end if				set curSession to current session			end tell		else			tell (make new terminal)				set curSession to current session			end tell		end if		tell curSession			write text "cd " &amp; theDir &amp; ";clear;" &amp; "pwd;"		end tell	end tellend old</string>
+					<string>tell application "Finder"	set dirPath to quoted form of (POSIX path of (folder of the front window as alias))	--display dialog 	set opened to (application "iTerm" is running)		tell application "iTerm"		my old(dirPath, opened)	end tellend tellon old(theDir, isOpened)	tell application "iTerm"		activate		set curTerm to (current terminal)		if curTerm is not equal to missing value then			tell curTerm				if isOpened then					launch session "Default"				end if				set curSession to current session			end tell		else			tell (make new terminal)				set curSession to current session			end tell		end if		tell curSession			write text "cd " &amp; theDir &amp; ";clear;" &amp; "pwd;"		end tell	end tellend old</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -107,7 +107,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>309.000000:582.000000</string>
+				<string>309.000000:316.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
